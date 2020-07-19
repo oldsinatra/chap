@@ -51,7 +51,6 @@
                     <div class="card-title">
                         <h2>{{$question->answers_count ." ". str_plural('Answer',$question->answers_count)}}</h2>
                     </div>
-                    <hr>
 
                     @foreach($question->answers as $answer)
                         <div class="media">
@@ -80,6 +79,12 @@
                         </div>
                         <hr>
                     @endforeach
+                    @include('answers._index', [
+                        'answers' => $question->answers,
+                        'answersCount' => $question->answers_count,
+                        ])
+
+                    @include('answers._create')    
                 </div>
             </div>
         </div>
