@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email','nwsc','password',
     ];
 
     /**
@@ -45,7 +45,7 @@ class User extends Authenticatable
     public function getUrlLAttribute()
     {
         //return route("questions.show",$this->id);
-        return '#'; 
+        return '#';
     }
 
     public function answers(){
@@ -76,13 +76,13 @@ class User extends Authenticatable
     public function voteQuestion(Question $question, $vote){
             $voteQuestions = $this->voteQuestions();
            $this->_vote($voteQuestions, $question, $vote);
-    } 
+    }
 
     public function voteAnswer(Answer $answer, $vote){
         $voteAnswers = $this->voteAnswers();
         $this->_vote($voteAnswers, $answer, $vote);
     }
-    
+
     private function _vote($relationship,$model,$vote){
         if($relationship->where('votable_id',$model->id)->exists()){
             $relationship->updateExistingPivot($model,['vote'=>$vote]);
